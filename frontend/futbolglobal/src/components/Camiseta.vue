@@ -1,6 +1,7 @@
 <template>
   <div class="border-[1px] w-[50vh] h-[80vh] rounded-[50px]">
     <img class="w-full h-[60%] rounded-t-[50px]" :src="imagen" alt="Imagen camiseta"/>
+
     <div class="h-full m-[10px] flex flex-col items-center gap-[20px]">
         <h1 class="text-center text-[18px] font-semibold">{{ nombre }}</h1>
         <p class="text-[25px] font-bold">{{ precio }}€</p>
@@ -38,3 +39,4 @@ export default {
     }
 }
 </script>
+
