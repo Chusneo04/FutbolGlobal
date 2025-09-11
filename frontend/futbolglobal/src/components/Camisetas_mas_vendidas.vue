@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-wrap w-full justify-between p-[50px]">
+    <div class="flex flex-wrap w-full justify-between p-[50px] h-[110vh]">
         <CamisetaComponent v-for="(camiseta, index) in camisetas" :key="index" :nombre="camiseta.nombre" :precio="camiseta.precio" :imagen="camiseta.imagen"></CamisetaComponent>
     </div>
 </template>

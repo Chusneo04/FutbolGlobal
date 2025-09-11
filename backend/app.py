@@ -11,10 +11,8 @@ CORS(app)
 @app.route('/obtener_equipos/<liga>', methods = ['GET', 'POST'])
 def index(liga):
     cursor = mysql.connection.cursor()
-    cursor.execute('use bmizzxi4s2m5kkaepnot')
     cursor.execute('SELECT * FROM equipos WHERE liga = %s', (liga,))
     resultados = cursor.fetchall()
-    cursor.close()
     equipos = []
     for fila in resultados:
         equipos.append({
@@ -23,6 +21,8 @@ def index(liga):
             'liga': fila[2],
             'imagen':fila[3]
         })
+    
+    
     return jsonify(equipos)
     
 
@@ -31,7 +31,8 @@ def obtener_camisetas_aleatorias():
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM camisetas ORDER BY RAND() LIMIT 3')
     resultados = cursor.fetchall()
-    cursor.close()
+    
+    
     camisetas = []
     for fila in resultados:
         camisetas.append({
