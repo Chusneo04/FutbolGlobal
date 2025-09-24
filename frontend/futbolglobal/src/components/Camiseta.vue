@@ -10,6 +10,7 @@
             <p>{{ cantidad }}</p>
             <button @click="sumar" class="hover:bg-[#2EBF35] p-[10px] w-[50px] text-center">+</button>
         </div>
+        <button @click="añadir()">Añadir al carrito</button>
     </div>
   </div>
 </template>
@@ -35,6 +36,10 @@ export default {
             if (this.cantidad > 0) {
                 this.cantidad --
             }
+        },
+        añadir(){
+            console.log(this.cantidad);
+            
         }
     }
 }
