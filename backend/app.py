@@ -79,7 +79,7 @@ def login():
         if usuario_existente:
             if check_password_hash(usuario_existente[3], clave):
                 resp = make_response(jsonify({'mensaje': 'Bienvenido {}'.format(usuario_existente[1])})) 
-                resp.set_cookie('usuario', correo, max_age=60*60*24, samesite='None', secure=True)
+                resp.set_cookie('usuario', correo, httponly=True, max_age=60*60*24, samesite='None', secure=True, domain='https://futbolglobal-frontend-wr2g.onrender.com')
                 return resp
             return jsonify({'mensaje':'Las credenciales introducidas son incorrectas'})
         return jsonify({'mensaje':'El usuario no existe'})
@@ -105,7 +105,7 @@ def register():
             cursor.execute('SELECT * FROM usuarios WHERE correo = %s', (correo,))
             usuario = cursor.fetchone()
             resp = make_response(jsonify({'mensaje': 'Bienvenido {}'.format(usuario[1])})) 
-            resp.set_cookie('usuario', correo, httponly=True, max_age=60*60*24, samesite='None', secure=True)
+            resp.set_cookie('usuario', correo, httponly=True, max_age=60*60*24, samesite='None', secure=True, domain='https://futbolglobal-frontend-wr2g.onrender.com')
             return resp
 
 @app.route('/logout', methods = ['GET', 'POST'])
