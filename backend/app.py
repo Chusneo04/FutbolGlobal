@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__)
 app.config.from_object(Config)
 mysql = MySQL(app)
-CORS(app, supports_credentials=True, origins=['https://futbolglobal-frontend-wr2g.onrender.com/'])
+CORS(app, supports_credentials=True, origins=['https://futbolglobal-frontend-wr2g.onrender.com'])
 
 
 @app.route('/obtener_equipos/<liga>', methods = ['GET', 'POST'])
