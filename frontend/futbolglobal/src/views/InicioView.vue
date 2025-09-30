@@ -19,19 +19,8 @@ export default {
     NavbarComponent,
     Camisetas_mas_vendidasComponent,
     FooterComponent
-  },
-  methods: {
-    usuario_logueado(){
-        const usuario_logueado = this.$cookies.get('usuario')
-        if (usuario_logueado) {
-            window.location.href = '/perfil'
-        }
-        
-    }
-  },
-  mounted(){
-    this.usuario_logueado()
   }
+  
 }
 </script>
 

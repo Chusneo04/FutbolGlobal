@@ -6,7 +6,9 @@
       </div>
       <div class="flex gap-[35px] text-[20px]">
         <a href='/' class="cursor-[pointer] bg-[#C72E22] text-[white] w-[6rem] h-[50px] flex items-center justify-center text-center rounded hover:border-[2px] hover:border-[#C72E22] hover:text-[#C72E22] hover:bg-[white] transition-colors duration-500">Inicio</a>
-        <p class="cursor-[pointer] border-[2px] border-[#C72E22] text-[#C72E22] w-[6rem] flex items-center justify-center text-center rounded hover:border-none hover:bg-[#C72E22] hover:text-[white] transition-colors duration-500 delay-150">Carrito</p>
+        <a href="/carrito" class="cursor-[pointer] border-[2px] border-[#C72E22] text-[#C72E22] w-[6rem] flex items-center justify-center text-center rounded hover:border-none hover:bg-[#C72E22] hover:text-[white] transition-colors duration-500 delay-150">Carrito</a>
+        <a href='/perfil' class="cursor-[pointer] bg-[#C72E22] text-[white] w-[6rem] h-[50px] flex items-center justify-center text-center rounded hover:border-[2px] hover:border-[#C72E22] hover:text-[#C72E22] hover:bg-[white] transition-colors duration-500">Perfil</a>
+
       </div>
     </div>
 
