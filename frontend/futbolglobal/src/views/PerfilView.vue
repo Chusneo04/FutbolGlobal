@@ -48,7 +48,7 @@ export default {
     },
     methods: {
         async cerrarSesion(){
-            const respuesta = await fetch('http://localhost:5000/logout',{
+            const respuesta = await fetch('https://futbolglobal-frontend.onrender.com/logout',{
                 method: 'POST',
                 credentials: 'include'
             })
@@ -58,7 +58,7 @@ export default {
         },
         obtenerUsuario(){
             const correo = this.$cookies.get('usuario')
-            fetch(`http://localhost:5000/obtener-usuario/${correo}`)
+            fetch(`https://futbolglobal-frontend.onrender.com/obtener-usuario/${correo}`)
                 .then(res => res.json())
                 .then(data => {
                     this.usuario = data
@@ -83,7 +83,7 @@ export default {
         },
         obtenerPedidos(){
             const correo = this.$cookies.get('usuario')
-            fetch(`http://localhost:5000/obtener_pedidos/${correo}`)
+            fetch(`https://futbolglobal-frontend.onrender.com/${correo}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);

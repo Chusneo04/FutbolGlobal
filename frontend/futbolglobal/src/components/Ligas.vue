@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     cargarLigas(categoria) {
-      fetch(`http://localhost:5000/obtener-camisetas/${encodeURIComponent(categoria)}`)
+      fetch(`https://futbolglobal-frontend.onrender.com/obtener-camisetas/${encodeURIComponent(categoria)}`)
         .then(res => res.json())
         .then(data => {
           console.log(data)

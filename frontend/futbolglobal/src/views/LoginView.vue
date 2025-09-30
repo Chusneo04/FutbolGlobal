@@ -43,7 +43,7 @@ export default {
                 correo: this.correo,
                 clave: this.clave
             }
-            const respuesta = await fetch('http://localhost:5000/login', {
+            const respuesta = await fetch('https://futbolglobal-frontend.onrender.com/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -56,7 +56,7 @@ export default {
                     cantidad : this.cantidad,
                     cookie : cookie
                 }
-                const respuesta = await fetch(`http://localhost:5000/añadir_carrito/${this.id}`,{
+                const respuesta = await fetch(`https://futbolglobal-frontend.onrender.com/añadir_carrito/${this.id}`,{
                     method : 'POST',
                     headers : {
                         'Content-Type':'application/json'

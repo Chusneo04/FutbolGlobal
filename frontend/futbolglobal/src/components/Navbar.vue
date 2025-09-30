@@ -52,7 +52,7 @@ export default {
     setActive(key) {
       this.active = key;
       
-      fetch(`http://localhost:5000/obtener_equipos/${key}`)
+      fetch(`https://futbolglobal-frontend.onrender.com/obtener_equipos/${key}`)
       .then(res => res.json())
       .then(data => {
         console.log(data);  
