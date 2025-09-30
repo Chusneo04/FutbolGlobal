@@ -79,7 +79,7 @@ def login():
         if usuario_existente:
             if check_password_hash(usuario_existente[3], clave):
                 resp = make_response(jsonify({'mensaje': 'Bienvenido {}'.format(usuario_existente[1])})) 
-                resp.set_cookie('usuario', correo, httponly=True, max_age=60*60*24, samesite='None', secure=True)
+                resp.set_cookie('usuario', correo, max_age=60*60*24, samesite='None', secure=True)
                 return resp
             return jsonify({'mensaje':'Las credenciales introducidas son incorrectas'})
         return jsonify({'mensaje':'El usuario no existe'})
