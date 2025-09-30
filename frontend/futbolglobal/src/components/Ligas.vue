@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-wrap w-full justify-center items-center p-[50px] gap-x-[100px] gap-y-[100px]">
-    <CamisetaComponent v-for="(camiseta, index) in camisetas" :key="index" :nombre="camiseta.nombre" :precio="camiseta.precio" :imagen="camiseta.imagen"></CamisetaComponent>
+    <CamisetaComponent v-for="(camiseta, index) in camisetas" :key="index" :id="camiseta.id" :nombre="camiseta.nombre" :stock="camiseta.stock" :precio="camiseta.precio" :imagen="camiseta.imagen"></CamisetaComponent>
   
   </div>
 </template>

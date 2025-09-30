@@ -10,6 +10,7 @@ import LigasView from './views/LigasView.vue'
 import RegisterView from './views/RegisterView.vue'
 import LoginView from './views/LoginView.vue'
 import PerfilView from './views/PerfilView.vue'
+import CarritoView from './views/CarritoView.vue'
 export default {
   name: 'App',
   components: {
@@ -17,7 +18,8 @@ export default {
     LigasView,
     RegisterView,
     LoginView,
-    PerfilView
+    PerfilView,
+    CarritoView
   },
   computed: {
     vistaActual() {
@@ -30,10 +32,10 @@ export default {
         return 'RegisterView'
       if (path == '/login')
         return 'LoginView'
-      if (path == '/perfil') {
+      if (path == '/perfil') 
         return 'PerfilView'
-      }
-
+      if (path == '/carrito') 
+        return 'CarritoView'
 
       return 'InicioView'
     },

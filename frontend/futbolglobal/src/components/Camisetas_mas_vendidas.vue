@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-wrap w-full justify-between p-[50px] h-[110vh]">
-        <CamisetaComponent v-for="(camiseta, index) in camisetas" :key="index" :nombre="camiseta.nombre" :precio="camiseta.precio" :imagen="camiseta.imagen"></CamisetaComponent>
+        <CamisetaComponent v-for="(camiseta, index) in camisetas" :key="index" :id="camiseta.id" :nombre="camiseta.nombre" :stock="camiseta.stock" :precio="camiseta.precio" :imagen="camiseta.imagen"></CamisetaComponent>
     </div>
 </template>
 
@@ -27,7 +27,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

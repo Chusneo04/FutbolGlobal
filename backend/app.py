@@ -126,5 +126,88 @@ def obtener_usuario(correo):
 
     return usuario
 
+@app.route('/añadir_carrito/<id>', methods = ['GET','POST'])
+def añadir_carrito(id):
+    datos = request.get_json()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT id FROM usuarios WHERE correo = %s', (datos['cookie'],))
+    id_cliente = cursor.fetchone()[0]
+    cursor.execute('INSERT INTO carrito (id_camiseta, cliente_id, cantidad) VALUES (%s, %s, %s)', (id, id_cliente, datos['cantidad']))
+    mysql.connection.commit()
+    return jsonify({'mensaje':'Producto añadido al carrito correctamente'})
+
+@app.route('/obtener_carrito/<correo>')
+def obtener_carrito(correo):
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT id FROM usuarios WHERE correo = %s', (correo,))
+    id_cliente = cursor.fetchone()
+    cursor.execute('SELECT * FROM carrito WHERE cliente_id = %s', (id_cliente,))
+    carrito = cursor.fetchall()
+    camisetas = []
+    for producto in carrito:
+        print(carrito)
+        cursor.execute('SELECT * FROM camisetas WHERE id = %s', (producto[1],))
+        camiseta = cursor.fetchall()
+        atributos_camiseta = {'nombre':camiseta[0][2], 'precio':camiseta[0][3], 'imagen':camiseta[0][5], 'cantidad':producto[3]}
+        camisetas.append(atributos_camiseta)
+    return jsonify(camisetas)
+
+@app.route('/eliminar_carrito', methods = ['DELETE'])
+def eliminar_carrito():
+    try:
+
+        datos = request.get_json()
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT id FROM camisetas WHERE nombre = %s ', (datos['nombre'],))
+        id_camiseta = cursor.fetchone()[0]
+        print(id_camiseta)
+        cursor.execute('DELETE FROM carrito WHERE id_camiseta = %s',(id_camiseta,))
+        mysql.connection.commit()
+        return jsonify({'mensaje':'Producto eliminado correctamente'})
+    except:
+        return jsonify({'mensaje':'Ha ocurrido un error al eliminar el producto'})
+    
+@app.route('/comprar', methods = ['DELETE'])
+def comprar():
+    try:
+        datos = request.get_json()
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT id FROM usuarios WHERE correo = %s', (datos['correo'],))
+        id_usuario = cursor.fetchone()
+        cursor.execute('SELECT * FROM carrito WHERE cliente_id = %s', (id_usuario[0],))
+        carrito_cliente = cursor.fetchall()
+        productos_cliente = []
+        for producto in carrito_cliente:
+            productos_cliente.append({'id':producto[0], 'id_camiseta':producto[1], 'id_cliente':producto[2], 'cantidad':producto[3]})
+            
+        for producto in productos_cliente:
+            cursor.execute('INSERT INTO pedidos (id_camiseta, cliente_id, cantidad) VALUES (%s, %s, %s)', (producto['id_camiseta'], producto['id_cliente'], producto['cantidad']))
+            
+        
+        cursor.execute('DELETE FROM carrito WHERE cliente_id = %s', (id_usuario, ))
+        mysql.connection.commit()
+
+        return jsonify({'mensaje':'Compra realizada correctamente'})
+    except Exception as e:
+        print(e)
+        return jsonify({'mensaje': 'Ha ocurrido un error al realizar la compra'})   
+
+
+@app.route('/obtener_pedidos/<correo>')
+def obtener_pedidos(correo):
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT id FROM usuarios WHERE correo = %s', (correo,))
+    id_cliente = cursor.fetchone()
+    cursor.execute('SELECT * FROM pedidos WHERE cliente_id = %s', (id_cliente,))
+    pedidos = cursor.fetchall()
+    camisetas = []
+    for producto in pedidos:
+        print(pedidos)
+        cursor.execute('SELECT * FROM camisetas WHERE id = %s', (producto[1],))
+        camiseta = cursor.fetchall()
+        atributos_camiseta = {'nombre':camiseta[0][2], 'precio':camiseta[0][3], 'imagen':camiseta[0][5], 'cantidad':producto[3]}
+        camisetas.append(atributos_camiseta)
+    return jsonify(camisetas)    
+
 if __name__ == "__main__":
     app.run(debug=True)
