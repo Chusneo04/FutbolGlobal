@@ -43,6 +43,8 @@ export default {
                 correo: this.correo,
                 clave: this.clave
             }
+            console.log(this.correo, this.clave);
+            
             const respuesta = await fetch('https://futbolglobal-frontend.onrender.com/login', {
                 method: 'POST',
                 headers: {
