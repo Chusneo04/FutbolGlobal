@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request, make_response
 from flask_mysqldb import MySQL
 from config import Config
+import os
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__)
@@ -210,4 +211,5 @@ def obtener_pedidos(correo):
     return jsonify(camisetas)    
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
