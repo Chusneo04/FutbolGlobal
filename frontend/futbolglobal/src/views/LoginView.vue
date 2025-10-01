@@ -54,7 +54,6 @@ export default {
                 credentials: 'include'
             })
             const resultado = await respuesta.json()
-            window.location.href = '/perfil'
             alert(resultado.mensaje)
         },
         usuario_logueado(){
