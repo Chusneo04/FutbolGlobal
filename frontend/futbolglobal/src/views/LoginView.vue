@@ -56,13 +56,16 @@ export default {
             const resultado = await respuesta.json()
             alert(resultado.mensaje)
         },
-        usuario_logueado(){
-            const usuario_logueado = this.$cookies.get('usuario')
-            if (usuario_logueado) {
-                window.location.href = '/perfil'
+        async usuario_logueado() {
+            const respuesta = await fetch('https://futbolglobal-frontend.onrender.com/validar_usuario', {
+                method: 'GET',
+                credentials: 'include'
+            });
+            const resultado = await respuesta.json();
+                if (resultado.autenticado) {
+                    window.location.href = '/perfil';
+                }
             }
-            
-        }
     },
     mounted(){
         this.usuario_logueado()

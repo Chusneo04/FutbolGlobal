@@ -210,6 +210,14 @@ def obtener_pedidos(correo):
         camisetas.append(atributos_camiseta)
     return jsonify(camisetas)    
 
+@app.route('/validar_usuario', methods=['GET'])
+def validar_usuario():
+    usuario = request.cookies.get('usuario')
+    if usuario:
+        return jsonify({'autenticado': True})
+    return jsonify({'autenticado': False})
+
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
