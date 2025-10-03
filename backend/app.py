@@ -1,13 +1,12 @@
 from flask import Flask, jsonify, request, make_response
 from flask_mysqldb import MySQL
 from config import Config
-import os
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__)
 app.config.from_object(Config)
 mysql = MySQL(app)
-CORS(app, supports_credentials=True, origins=['https://futbolglobal-frontend-wr2g.onrender.com'])
+CORS(app, supports_credentials=True)
 
 
 @app.route('/obtener_equipos/<liga>', methods = ['GET', 'POST'])
@@ -80,7 +79,7 @@ def login():
         if usuario_existente:
             if check_password_hash(usuario_existente[3], clave):
                 resp = make_response(jsonify({'mensaje': 'Bienvenido {}'.format(usuario_existente[1])})) 
-                resp.set_cookie('usuario', correo, httponly=True, max_age=60*60*24, samesite='None', secure=True)
+                resp.set_cookie('usuario', correo, httponly=False, max_age=60*60*24)
                 return resp
             return jsonify({'mensaje':'Las credenciales introducidas son incorrectas'})
         return jsonify({'mensaje':'El usuario no existe'})
@@ -106,7 +105,7 @@ def register():
             cursor.execute('SELECT * FROM usuarios WHERE correo = %s', (correo,))
             usuario = cursor.fetchone()
             resp = make_response(jsonify({'mensaje': 'Bienvenido {}'.format(usuario[1])})) 
-            resp.set_cookie('usuario', correo, httponly=True, max_age=60*60*24, samesite='None', secure=True, domain='https://futbolglobal-frontend-wr2g.onrender.com')
+            resp.set_cookie('usuario', correo, httponly=True, max_age=60*60*24)
             return resp
 
 @app.route('/logout', methods = ['GET', 'POST'])
@@ -210,14 +209,5 @@ def obtener_pedidos(correo):
         camisetas.append(atributos_camiseta)
     return jsonify(camisetas)    
 
-@app.route('/validar_usuario', methods=['GET'])
-def validar_usuario():
-    usuario = request.cookies.get('usuario')
-    if usuario:
-        return jsonify({'autenticado': True})
-    return jsonify({'autenticado': False})
-
-
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(debug=True)

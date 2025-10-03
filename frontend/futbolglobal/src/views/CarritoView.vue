@@ -52,7 +52,7 @@ export default {
     methods:{
         obtenerCarrito(){
             const correo = this.$cookies.get('usuario')
-            fetch(`https://futbolglobal-frontend.onrender.com/${correo}`)
+            fetch(`http://localhost:5000/${correo}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
@@ -67,7 +67,7 @@ export default {
                 })
         },
         eliminarCarrito(nombre){
-            fetch('https://futbolglobal-frontend.onrender.com/eliminar_carrito', {
+            fetch('http://localhost:5000/eliminar_carrito', {
                 method : 'DELETE',
                 headers: {
                     'Content-Type':'application/json'
@@ -83,7 +83,7 @@ export default {
         },
         comprar(){
             const correo = this.$cookies.get('usuario')
-            fetch('https://futbolglobal-frontend.onrender.com/comprar', {
+            fetch('http://localhost:5000/comprar', {
                 method: 'DELETE',
                 headers:{
                     'Content-Type':'application/json'

@@ -18,7 +18,7 @@ export default {
     },
 
     mounted() {
-    fetch(`https://futbolglobal-frontend.onrender.com/obtener-camisetas-aleatorias`)
+    fetch(`http://localhost:5000/obtener-camisetas-aleatorias`)
       .then(res => res.json())
       .then(data => {
         console.log(data);  

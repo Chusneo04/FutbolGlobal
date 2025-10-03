@@ -45,7 +45,7 @@ export default {
             }
             console.log(this.correo, this.clave);
             
-            const respuesta = await fetch('https://futbolglobal-frontend.onrender.com/login', {
+            const respuesta = await fetch('http://localhost:5000/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -55,17 +55,17 @@ export default {
             })
             const resultado = await respuesta.json()
             alert(resultado.mensaje)
+            this.usuario_logueado()
         },
-        async usuario_logueado() {
-            const respuesta = await fetch('https://futbolglobal-frontend.onrender.com/validar_usuario', {
-                method: 'GET',
-                credentials: 'include'
-            });
-            const resultado = await respuesta.json();
-                if (resultado.autenticado) {
-                    window.location.href = '/perfil';
-                }
+        usuario_logueado(){
+            const usuario_logueado = this.$cookies.get('usuario')
+            console.log('Hola:',usuario_logueado);
+            
+            if (usuario_logueado) {
+                window.location.href = '/perfil'
             }
+            
+        }
     },
     mounted(){
         this.usuario_logueado()
